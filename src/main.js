@@ -127,33 +127,58 @@ setupLights();
 
 // ===== 視角切換功能 =====
 let currentView = 'overview';
+let isAnimating = false;
 
 function switchView(viewName) {
   const view = CAMERA_VIEWS[viewName];
-  if (!view) return;
+  if (!view || isAnimating) return;
   
   currentView = viewName;
+  isAnimating = true;
   
-  // 平滑過渡相機位置
   const targetPos = new THREE.Vector3(...view.pos);
   const targetLook = new THREE.Vector3(...view.target);
-  
-  // 簡單的動畫過渡
   const startPos = camera.position.clone();
   const startTarget = controls.target.clone();
-  const duration = 1000;
+  
+  // 計算距離，根據距離調整動畫時間
+  const distance = startPos.distanceTo(targetPos);
+  const duration = Math.min(2000, Math.max(800, distance * 120));
+  
+  // 計算中間點（弧形路徑）- 讓相機先拉高再移動
+  const midPoint = new THREE.Vector3().lerpVectors(startPos, targetPos, 0.5);
+  const heightBoost = Math.max(startPos.y, targetPos.y) + distance * 0.15;
+  midPoint.y = Math.max(midPoint.y, heightBoost);
+  
   const startTime = Date.now();
   
   function animateCamera() {
     const elapsed = Date.now() - startTime;
     const t = Math.min(elapsed / duration, 1);
-    const easeT = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
     
-    camera.position.lerpVectors(startPos, targetPos, easeT);
+    // 使用更平滑的 ease-in-out 曲線
+    const easeT = t < 0.5 
+      ? 4 * t * t * t 
+      : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    
+    // 二次貝茲爾曲線：起點 -> 中間點 -> 終點
+    const p0 = startPos;
+    const p1 = midPoint;
+    const p2 = targetPos;
+    
+    // B(t) = (1-t)²*P0 + 2*(1-t)*t*P1 + t²*P2
+    const oneMinusT = 1 - easeT;
+    const posX = oneMinusT * oneMinusT * p0.x + 2 * oneMinusT * easeT * p1.x + easeT * easeT * p2.x;
+    const posY = oneMinusT * oneMinusT * p0.y + 2 * oneMinusT * easeT * p1.y + easeT * easeT * p2.y;
+    const posZ = oneMinusT * oneMinusT * p0.z + 2 * oneMinusT * easeT * p1.z + easeT * easeT * p2.z;
+    
+    camera.position.set(posX, posY, posZ);
     controls.target.lerpVectors(startTarget, targetLook, easeT);
     
     if (t < 1) {
       requestAnimationFrame(animateCamera);
+    } else {
+      isAnimating = false;
     }
   }
   

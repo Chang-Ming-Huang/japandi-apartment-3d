@@ -212,7 +212,7 @@ function createOfficeChair() {
 // 組裝工作室
 // 房間深度 4.0m（從 Z=-2.0 門口到 Z=2.0 後牆）
 // 配置：
-//   - 書桌面向窗戶（後牆）
+//   - 書桌靠左牆，面向右側，窗戶光線從左側灑入
 //   - 窗戶在後牆，提供自然採光
 //   - 層架靠左牆靠近門口
 export function createStudyRoom(offsetX = 0, offsetZ = 0) {
@@ -225,22 +225,22 @@ export function createStudyRoom(offsetX = 0, offsetZ = 0) {
   window.position.set(0, H/2, 1.85);
   g.add(window);
   
-  // 書桌 - 面向窗戶，在房間後半部
+  // 書桌 - 靠左牆，轉 90 度面向右側，讓窗戶光線從左側灑入
   const desk = createDesk();
-  desk.position.set(0, 0, 0.8);
-  desk.rotation.y = Math.PI;  // 面向窗戶
+  desk.position.set(-0.6, 0, 0.5);
+  desk.rotation.y = Math.PI / 2;  // 轉 90 度，面向右側
   g.add(desk);
   
   // 電腦螢幕 - 在書桌上，面向使用者
   const monitor = createMonitor();
-  monitor.position.set(0, 0, 1.0);
-  monitor.rotation.y = Math.PI;
+  monitor.position.set(-0.75, 0, 0.5);
+  monitor.rotation.y = Math.PI / 2;
   g.add(monitor);
   
-  // 辦公椅 - 在書桌前，面向窗戶
+  // 辦公椅 - 在書桌右側，面向左側（面向書桌）
   const chair = createOfficeChair();
-  chair.position.set(0, 0, 0.3);
-  chair.rotation.y = Math.PI;  // 面向書桌/窗戶
+  chair.position.set(-0.05, 0, 0.5);
+  chair.rotation.y = -Math.PI / 2;  // 面向左側（書桌方向）
   g.add(chair);
   
   // 層架 - 靠左牆靠近門口

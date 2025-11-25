@@ -196,14 +196,14 @@
   
   <div id="canvas-container"></div>
   
-  <!-- 空間導覽列 -->
+  <!-- 空間導覽列 (按空間位置排列，讓視角切換更連貫) -->
   <nav id="nav-bar">
     <button class="view-btn active" data-view="overview" onclick="switchView('overview')">全屋俯視</button>
-    <button class="view-btn" data-view="living" onclick="switchView('living')">客廳</button>
-    <button class="view-btn" data-view="kitchen" onclick="switchView('kitchen')">餐廚區</button>
     <button class="view-btn" data-view="master" onclick="switchView('master')">主臥室</button>
     <button class="view-btn" data-view="study" onclick="switchView('study')">工作室</button>
     <button class="view-btn" data-view="bath" onclick="switchView('bath')">衛浴</button>
+    <button class="view-btn" data-view="kitchen" onclick="switchView('kitchen')">餐廚區</button>
+    <button class="view-btn" data-view="living" onclick="switchView('living')">客廳</button>
   </nav>
 
   <div id="info-panel">

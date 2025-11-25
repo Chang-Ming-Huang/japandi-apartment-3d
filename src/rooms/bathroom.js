@@ -220,19 +220,19 @@ export function createBathroom(offsetX = 0, offsetZ = 0) {
   
   // 洗手台 - 靠近門口但不擋門，轉 90 度靠左牆
   const vanity = createVanity();
-  vanity.position.set(-0.5, 0, -1.0);
+  vanity.position.set(-0.75, 0, -1.0);
   vanity.rotation.y = Math.PI / 2; // 轉 90 度靠牆
   g.add(vanity);
   
   // 鏡子 - 洗手台上方（左牆）
   const mirror = createMirror();
-  mirror.position.set(-0.75, 1.5, -1.0);
+  mirror.position.set(-0.9, 1.5, -1.0);
   mirror.rotation.y = Math.PI / 2;
   g.add(mirror);
   
   // 馬桶 - 中間位置，轉 90 度靠左牆
   const toilet = createToilet();
-  toilet.position.set(-0.5, 0, 0.2);
+  toilet.position.set(-0.75, 0, 0.2);
   toilet.rotation.y = Math.PI / 2; // 轉 90 度靠牆
   g.add(toilet);
   
