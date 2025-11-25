@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20坪 Japandi 公寓 3D 展示</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+      overflow: hidden;
+      background: #1a1a2e;
+    }
+    #canvas-container {
+      width: 100vw;
+      height: 100vh;
+    }
+    #info-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      max-width: 320px;
+      z-index: 100;
+    }
+    #info-panel h1 {
+      font-size: 1.3rem;
+      color: #4A4A4A;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #D4C5B0;
+      padding-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    #info-panel p {
+      font-size: 0.9rem;
+      color: #636e72;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    #info-panel .spec {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    #info-panel .spec-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      font-size: 0.85rem;
+    }
+    #info-panel .spec-label {
+      color: #636e72;
+    }
+    #info-panel .spec-value {
+      color: #2d3436;
+      font-weight: 600;
+    }
+    #info-panel .design-notes {
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid #e9ecef;
+    }
+    #info-panel .design-notes h3 {
+      font-size: 0.95rem;
+      color: #2d3436;
+      margin-bottom: 8px;
+    }
+    #info-panel .design-notes ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #info-panel .design-notes li {
+      font-size: 0.8rem;
+      color: #636e72;
+      padding: 3px 0;
+      padding-left: 15px;
+      position: relative;
+    }
+    #info-panel .design-notes li::before {
+      content: '•';
+      color: #8C8279;
+      position: absolute;
+      left: 0;
+    }
+    /* 空間導覽列 */
+    #nav-bar {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 15px;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      gap: 8px;
+      z-index: 100;
+    }
+    .view-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #4A4A4A;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    .view-btn:hover {
+      background-color: #D4C5B0;
+      color: white;
+    }
+    .view-btn.active {
+      background-color: #8C8279;
+      color: white;
+      font-weight: bold;
+    }
+    #controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 25px;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      gap: 15px;
+      z-index: 100;
+    }
+    #controls span {
+      font-size: 0.85rem;
+      color: #636e72;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    #controls kbd {
+      background: #e9ecef;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: monospace;
+    }
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1a2e;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+    }
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loading h2 {
+      color: white;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #74b9ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <h2>載入 3D 場景中...</h2>
+  </div>
+  
+  <div id="canvas-container"></div>
+  
+  <!-- 空間導覽列 -->
+  <nav id="nav-bar">
+    <button class="view-btn active" data-view="overview" onclick="switchView('overview')">全屋俯視</button>
+    <button class="view-btn" data-view="living" onclick="switchView('living')">客廳</button>
+    <button class="view-btn" data-view="kitchen" onclick="switchView('kitchen')">餐廚區</button>
+    <button class="view-btn" data-view="master" onclick="switchView('master')">主臥室</button>
+    <button class="view-btn" data-view="study" onclick="switchView('study')">工作室</button>
+    <button class="view-btn" data-view="bath" onclick="switchView('bath')">衛浴</button>
+  </nav>
+
+  <div id="info-panel">
+    <h1>🏠 20坪 Japandi 公寓</h1>
+    <p>日式侘寂與北歐簡約的完美融合，以<strong>淺橡木地板</strong>與<strong>奶油白灰泥牆面</strong>為基調，營造溫暖、通透、無雜亂的居家空間。</p>
+    <div class="spec">
+      <div class="spec-item">
+        <span class="spec-label">總坪數</span>
+        <span class="spec-value">20 坪 (66 m²)</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">格局</span>
+        <span class="spec-value">2房1廳1衛</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">樓高</span>
+        <span class="spec-value">2.7m</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">風格</span>
+        <span class="spec-value">Japandi</span>
+      </div>
+    </div>
+    <div class="design-notes">
+      <h3>空間配置</h3>
+      <ul>
+        <li>客廳 8坪 - 低矮沙發、曲線茶几</li>
+        <li>餐廚 4坪 - L型廚具、中島餐桌</li>
+        <li>主臥 4坪 - 低床架、頂天衣櫃</li>
+        <li>多功能室 2.5坪 - 榻榻米、懸浮書桌</li>
+        <li>衛浴 1.5坪 - 乾濕分離、LED鏡</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div id="controls">
+    <span><kbd>滑鼠左鍵</kbd> 旋轉視角</span>
+    <span><kbd>滾輪</kbd> 縮放</span>
+    <span><kbd>滑鼠右鍵</kbd> 平移</span>
+  </div>
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

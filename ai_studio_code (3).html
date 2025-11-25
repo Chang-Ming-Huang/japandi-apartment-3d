@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20坪 Japandi 風格室內設計提案</title>
+    <style>
+        :root {
+            --bg-color: #FDFBF7; /* 奶油白背景 */
+            --text-color: #4A4A4A; /* 深灰文字 */
+            --accent-color: #8C8279; /* 暖灰點綴 */
+            --wood-color: #D4C5B0; /* 淺木色 */
+            --nav-bg: #FFFFFF;
+            --code-bg: #F4F1EA;
+            --placeholder-bg: #EFEBE4;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, 'PingFang TC', 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* 導覽列 */
+        header {
+            background-color: var(--nav-bg);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav button {
+            background: transparent;
+            border: 1px solid transparent;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            background-color: var(--wood-color);
+            color: white;
+        }
+
+        nav button.active {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* 內容區域 */
+        .content-section {
+            display: none; /* 預設隱藏 */
+            padding: 40px 0;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active {
+            display: block; /* 啟用時顯示 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .spatial-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .spatial-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 圖片佔位區域 Styles */
+        .image-wrapper {
+            position: relative;
+        }
+
+        .image-placeholder-frame {
+            width: 100%;
+            aspect-ratio: 16/9; /* 維持寬螢幕比例 */
+            background-color: var(--placeholder-bg);
+            border: 2px dashed #BDB3AA;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-placeholder-frame:hover {
+            border-color: var(--accent-color);
+            background-color: #E8E2D9;
+            color: var(--accent-color);
+        }
+
+        .placeholder-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.5;
+        }
+
+        .placeholder-text {
+            font-size: 0.9rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .placeholder-sub {
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+
+        /* 文字區域 */
+        .text-content h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            border-bottom: 2px solid var(--wood-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .specs {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--wood-color);
+        }
+
+        .specs ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .prompt-box {
+            background-color: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .prompt-box h3 {
+            margin-top: 0;
+            font-size: 1rem;
+            color: var(--accent-color);
+        }
+
+        .prompt-code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #333;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .copy-btn:active {
+            background: #eee;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+            font-size: 0.8rem;
+            border-top: 1px solid #eee;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>PROJECT: 20 PING JAPANDI RESIDENCE</h1>
+        <nav id="navbar">
+            <button class="active" onclick="showSection('living')">客廳 (Living)</button>
+            <button onclick="showSection('kitchen')">餐廚區 (Kitchen)</button>
+            <button onclick="showSection('master')">主臥室 (Master)</button>
+            <button onclick="showSection('multi')">多功能室 (Flex)</button>
+            <button onclick="showSection('bath')">衛浴 (Bath)</button>
+            <button onclick="showSection('overview')">全屋俯視 (Plan)</button>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- 客廳 -->
+    <section id="living" class="content-section active">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">📷</div>
+                    <div class="placeholder-text">PLACEHOLDER: LIVING ROOM</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+                <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: 5px;">*請在此處插入客廳渲染圖</p>
+            </div>
+            <div class="text-content">
+                <h2>客廳區 Living Room</h2>
+                <div class="specs">
+                    <strong>空間規格：</strong>
+                    <ul>
+                        <li>坪數：8 坪 (核心社交區)</li>
+                        <li>重點：寬敞感、採光、低矮家具</li>
+                        <li>功能：沙發休憩 + 開放式小書房/展示區</li>
+                    </ul>
+                </div>
+                <p>這是整個家的主角。採用淺橡木地板與塗料牆面，利用低矮的布藝沙發來放大空間視覺高度。亞麻窗簾過濾出的柔和光線是設計的靈魂。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-living">Interior design photography, wide angle shot of a 20-ping apartment living room, spacious 8-ping living area, Japandi style, blend of Scandinavian functionality and Japanese rustic minimalism. Light oak wood flooring, creamy white walls with textured plaster, low-profile beige fabric sofa, curved wooden coffee table. Soft natural sunlight streaming through sheer linen curtains, creating soft shadows. An open-plan layout visible in the background showing a compact minimal kitchen island. Warm, airy, cozy, clutter-free, high resolution, photorealistic, architectural digest style, 8k, --ar 16:9</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-living')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 餐廚區 -->
+    <section id="kitchen" class="content-section">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">🍽️</div>
+                    <div class="placeholder-text">PLACEHOLDER: KITCHEN</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+            </div>
+            <div class="text-content">
+                <h2>餐廚區 Dining & Kitchen</h2>
+                <div class="specs">
+                    <strong>空間規格：</strong>
+                    <ul>
+                        <li>坪數：3.5 - 4 坪</li>
+                        <li>配置：L 型廚具 + 中島兼餐桌</li>
+                        <li>重點：動線通透、節省空間</li>
+                    </ul>
+                </div>
+                <p>為了在有限空間內創造最大機能，採用 L 型廚具佈局。中島設計延伸出一張木製餐桌，既是備料區也是用餐區，視覺上與客廳連成一氣。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-kitchen">Interior design photography, view of a compact dining and kitchen area connected to living room. L-shaped kitchen layout with matte creamy white cabinets and light oak countertops. A multifunctional kitchen island that extends into a wooden dining table to save space. Japandi style, minimalist pendant light hanging above the table. Clean lines, clutter-free, airy atmosphere. Textured plaster walls, light oak flooring. Soft natural sunlight, photorealistic, 8k, --ar 16:9</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-kitchen')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主臥室 -->
+    <section id="master" class="content-section">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">🛏️</div>
+                    <div class="placeholder-text">PLACEHOLDER: MASTER BEDROOM</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+            </div>
+            <div class="text-content">
+                <h2>主臥室 Master Bedroom</h2>
+                <div class="specs">
+                    <strong>空間規格：</strong>
+                    <ul>
+                        <li>坪數：3.5 - 4 坪</li>
+                        <li>配置：標準雙人床 + 頂天衣櫃牆</li>
+                        <li>氛圍：沈穩、放鬆、私密</li>
+                    </ul>
+                </div>
+                <p>主臥室強調絕對的放鬆。使用與牆面同色的頂天立地衣櫃來隱藏收納量，減少壓迫感。低重心的床架與亞麻寢具延續了整體的日式侘寂氛圍。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-master">Interior design photography, cozy master bedroom, small but airy 4-ping space. Queen size low-profile bed with beige linen bedding. A floor-to-ceiling built-in wardrobe wall painted in creamy white to blend with the walls, seamless handle-less design. Japandi style, warm ambient lighting, minimal wood bedside table. Soft morning light filtering through blinds. Serene, relaxing, high resolution, 8k, --ar 16:9</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-master')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 多功能室 -->
+    <section id="multi" class="content-section">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">🍵</div>
+                    <div class="placeholder-text">PLACEHOLDER: FLEX ROOM</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+            </div>
+            <div class="text-content">
+                <h2>次臥/多功能室 Multifunctional</h2>
+                <div class="specs">
+                    <strong>空間規格：</strong>
+                    <ul>
+                        <li>坪數：2 - 2.5 坪</li>
+                        <li>配置：架高地板 (榻榻米概念) + 懸浮書桌</li>
+                        <li>功能：客房、閱讀室、瑜伽區</li>
+                    </ul>
+                </div>
+                <p>這是一個彈性空間。不做滿的家具配置，利用架高地板下方做收納。平時是明亮的書房，客人來訪時鋪上床墊即可變身為客房。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-multi">Interior design photography, small multifunctional room, 2.5 ping space. Raised wooden floor platform (Tatami style) with storage underneath. A floating desk near the window. Can serve as a guest room or reading nook. Minimalist aesthetics, sliding translucent door (shoji screen vibe but modern). Light oak wood texture everywhere, warm and inviting. Japandi style, architectural digest, 8k, --ar 16:9</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-multi')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 衛浴 -->
+    <section id="bath" class="content-section">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">🚿</div>
+                    <div class="placeholder-text">PLACEHOLDER: BATHROOM</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(3:4 or 16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+            </div>
+            <div class="text-content">
+                <h2>衛浴 Bathroom</h2>
+                <div class="specs">
+                    <strong>空間規格：</strong>
+                    <ul>
+                        <li>坪數：1.5 坪</li>
+                        <li>配置：乾濕分離淋浴間 + 懸浮洗手台</li>
+                        <li>風格：SPA 級質感、明亮</li>
+                    </ul>
+                </div>
+                <p>雖然空間不大，但透過玻璃隔斷和懸浮式櫃體，讓地板面積在視覺上延伸，創造出寬敞感。淺米色石材磚帶來高級且乾淨的感受。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-bath">Interior design photography, small modern bathroom, 1.5 ping space. Walk-in glass shower partition for dry/wet separation. Light beige stone tiles on walls, large mirror with hidden LED backlight to expand visual space. Floating wooden vanity cabinet. Japandi style, clean, bright, spa-like atmosphere, high detail, 8k, --ar 3:4</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-bath')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 全屋概覽 -->
+    <section id="overview" class="content-section">
+        <div class="spatial-info">
+            <div class="image-wrapper">
+                <!-- Image Placeholder Frame -->
+                <div class="image-placeholder-frame">
+                    <div class="placeholder-icon">📐</div>
+                    <div class="placeholder-text">PLACEHOLDER: 3D FLOOR PLAN</div>
+                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
+                </div>
+                <!-- End Frame -->
+            </div>
+            <div class="text-content">
+                <h2>全屋俯視 3D Plan</h2>
+                <div class="specs">
+                    <strong>總坪數：20 坪</strong>
+                    <ul>
+                        <li>格局：2房 1廳 1衛 + 開放式餐廚</li>
+                        <li>核心：公領域最大化 (8坪客廳 + 4坪餐廚)</li>
+                    </ul>
+                </div>
+                <p>這張圖是用於檢視動線與整體空間分配的俯視圖。可以清楚看到公私領域的劃分，以及核心客廳如何連結其他空間。</p>
+                
+                <div class="prompt-box">
+                    <h3>🎨 Midjourney Prompt</h3>
+                    <div class="prompt-code" id="prompt-overview">3D floor plan, isometric view, cutaway render of a 20-ping apartment. Layout includes a large spacious living room, an L-shaped open kitchen, one master bedroom, one small tatami room, and a bathroom. Japandi interior style, light oak wood floors, white walls. Realistic lighting, high detail, architectural visualization, clear zoning, --ar 16:9</div>
+                    <button class="copy-btn" onclick="copyToClipboard('prompt-overview')">Copy</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>Design Prompt Generator for Japandi Apartment | Generated by AI Assistant</p>
+</footer>
+
+<script>
+    function showSection(sectionId) {
+        // 1. 隱藏所有 section
+        const sections = document.querySelectorAll('.content-section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // 2. 移除所有按鈕的 active 狀態
+        const buttons = document.querySelectorAll('nav button');
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // 3. 顯示目標 section
+        document.getElementById(sectionId).classList.add('active');
+
+        // 4. 將點擊的按鈕設為 active
+        const targetBtn = Array.from(buttons).find(b => b.getAttribute('onclick').includes(sectionId));
+        if(targetBtn) targetBtn.classList.add('active');
+    }
+
+    function copyToClipboard(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Prompt 已複製到剪貼簿！');
+        }).catch(err => {
+            console.error('複製失敗:', err);
+        });
+    }
+</script>
+
+</body>
+</html>
