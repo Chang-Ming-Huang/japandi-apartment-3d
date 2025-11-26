@@ -219,3 +219,87 @@ window.addEventListener('resize', () => {
 
 // 初始視角
 setTimeout(() => switchView('overview'), 100);
+
+// ===== 手機版互動邏輯 =====
+if (window.innerWidth <= 768) {
+  const infoPanel = document.getElementById('info-panel');
+  const infoPanelTitle = infoPanel.querySelector('h1');
+
+  // 點擊標題切換展開/收合
+  infoPanelTitle.addEventListener('click', () => {
+    infoPanel.classList.toggle('expanded');
+  });
+
+  // 支援觸控手勢（向上滑展開，向下滑收合）
+  let startY = 0;
+  let currentY = 0;
+
+  infoPanel.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+  });
+
+  infoPanel.addEventListener('touchmove', (e) => {
+    currentY = e.touches[0].clientY;
+  });
+
+  infoPanel.addEventListener('touchend', () => {
+    const deltaY = currentY - startY;
+
+    if (deltaY > 50) {
+      // 向下滑收合
+      infoPanel.classList.remove('expanded');
+    } else if (deltaY < -50) {
+      // 向上滑展開
+      infoPanel.classList.add('expanded');
+    }
+  });
+}
+
+// ===== Nav Bar「半露出」優化（僅手機版） =====
+function optimizeNavBarScroll() {
+  if (window.innerWidth > 768) return; // 僅手機版生效
+
+  const navBar = document.getElementById('nav-bar');
+  const buttons = navBar.querySelectorAll('.view-btn');
+
+  if (buttons.length === 0) return;
+
+  // 計算所有按鈕的總寬度（包含 gap）
+  let totalWidth = 0;
+  const gap = 8; // CSS 中設定的 gap
+
+  buttons.forEach((btn, index) => {
+    totalWidth += btn.offsetWidth;
+    if (index < buttons.length - 1) {
+      totalWidth += gap;
+    }
+  });
+
+  // 取得最後一個按鈕的寬度
+  const lastButtonWidth = buttons[buttons.length - 1].offsetWidth;
+
+  // 計算需要露出的寬度（30-40%，這裡選擇 35%）
+  const peekWidth = lastButtonWidth * 0.35;
+
+  // 計算視窗寬度
+  const viewportWidth = window.innerWidth;
+
+  // 計算左側 padding（保持 16px）
+  const leftPadding = 16;
+
+  // 計算右側 padding，確保最後一個按鈕露出指定寬度
+  const rightPadding = Math.max(0, viewportWidth - totalWidth - leftPadding + lastButtonWidth - peekWidth);
+
+  // 動態設定 padding
+  navBar.style.paddingLeft = `${leftPadding}px`;
+  navBar.style.paddingRight = `${rightPadding}px`;
+}
+
+// 頁面載入時執行（手機版）
+if (window.innerWidth <= 768) {
+  // 等待 DOM 和按鈕完全載入
+  setTimeout(optimizeNavBarScroll, 200);
+
+  // 視窗大小改變時重新計算
+  window.addEventListener('resize', optimizeNavBarScroll);
+}
