@@ -129,10 +129,36 @@ setupLights();
 let currentView = 'overview';
 let isAnimating = false;
 
+// Nav Bar 自動滾動功能（手機版）
+function scrollNavBarToButton(viewName) {
+  const navBar = document.getElementById('nav-bar');
+  const activeBtn = document.querySelector(`.view-btn[data-view="${viewName}"]`);
+
+  if (!navBar || !activeBtn) return;
+
+  const btnLeft = activeBtn.offsetLeft;
+  const btnWidth = activeBtn.offsetWidth;
+  const navBarWidth = navBar.offsetWidth;
+
+  // 計算目標滾動位置：讓按鈕置中
+  const targetScrollLeft = btnLeft - (navBarWidth / 2) + (btnWidth / 2);
+
+  // 平滑滾動
+  navBar.scrollTo({
+    left: targetScrollLeft,
+    behavior: 'smooth'
+  });
+}
+
 function switchView(viewName) {
   const view = CAMERA_VIEWS[viewName];
   if (!view || isAnimating) return;
-  
+
+  // 手機版 nav bar 自動滾動
+  if (window.innerWidth <= 768) {
+    scrollNavBarToButton(viewName);
+  }
+
   currentView = viewName;
   isAnimating = true;
   
