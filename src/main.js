@@ -91,12 +91,12 @@ scene.add(apartment);
 
 // ===== 燈光系統 =====
 function setupLights() {
-  // 環境光
-  const ambient = new THREE.AmbientLight(0xfff8f0, 0.45);
+  // 環境光 - 提升基礎亮度
+  const ambient = new THREE.AmbientLight(0xfff8f0, 0.65);
   scene.add(ambient);
-  
-  // 主光源 - 模擬自然光
-  const mainLight = new THREE.DirectionalLight(0xffffff, 0.6);
+
+  // 主光源 - 模擬自然光（增強照明）
+  const mainLight = new THREE.DirectionalLight(0xffffff, 0.85);
   mainLight.position.set(5, 10, 5);
   mainLight.castShadow = true;
   mainLight.shadow.mapSize.width = 2048;
@@ -109,17 +109,17 @@ function setupLights() {
   mainLight.shadow.camera.bottom = -15;
   mainLight.shadow.bias = -0.0001;
   scene.add(mainLight);
-  
-  // 窗戶光
-  const windowLight = new THREE.DirectionalLight(0xfff8e6, 0.7);
+
+  // 窗戶光 - 強化自然光效果
+  const windowLight = new THREE.DirectionalLight(0xfff8e6, 0.8);
   windowLight.position.set(-8, 5, 0);
   windowLight.castShadow = true;
   windowLight.shadow.mapSize.width = 1024;
   windowLight.shadow.mapSize.height = 1024;
   scene.add(windowLight);
-  
-  // 半球光
-  const hemi = new THREE.HemisphereLight(0xfff8f0, 0xd4c4b0, 0.35);
+
+  // 半球光 - 增強天空光反射
+  const hemi = new THREE.HemisphereLight(0xfff8f0, 0xd4c4b0, 0.5);
   scene.add(hemi);
 }
 
