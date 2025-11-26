@@ -252,31 +252,37 @@
         right: 0;
         max-width: 100%;
         border-radius: 16px 16px 0 0;
-        max-height: 40vh;
+        max-height: 70vh;
         overflow-y: auto;
-        padding: 16px 20px;
+        overflow-x: hidden;
+        padding: 20px 20px 24px 20px;
+        padding-top: 28px; /* 為拖曳把手留空間 */
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-        transform: translateY(calc(100% - 60px));
         transition: transform 0.3s ease;
+      }
+
+      /* 預設收起狀態 - 露出標題和描述 */
+      #info-panel:not(.expanded) {
+        transform: translateY(calc(100% - 140px));
       }
 
       /* 展開狀態 */
       #info-panel.expanded {
         transform: translateY(0);
-        max-height: 70vh;
       }
 
       /* 拖曳把手視覺提示 */
       #info-panel::before {
         content: '';
         position: absolute;
-        top: 8px;
+        top: 10px;
         left: 50%;
         transform: translateX(-50%);
         width: 40px;
         height: 4px;
-        background: #d1d5db;
+        background: #bbb;
         border-radius: 2px;
+        z-index: 101;
       }
 
       #info-panel h1 {
