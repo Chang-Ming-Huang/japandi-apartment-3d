@@ -161,8 +161,13 @@ function switchView(viewName) {
 
   currentView = viewName;
   isAnimating = true;
-  
-  const targetPos = new THREE.Vector3(...view.pos);
+
+  // 手機版「全屋俯視」視角調整 - 提升相機高度
+  let targetPos = new THREE.Vector3(...view.pos);
+  if (window.innerWidth <= 768 && viewName === 'overview') {
+    targetPos.y = 16;  // 手機版提升相機高度至 16
+  }
+
   const targetLook = new THREE.Vector3(...view.target);
   const startPos = camera.position.clone();
   const startTarget = controls.target.clone();
