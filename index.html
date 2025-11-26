@@ -252,42 +252,41 @@
         right: 0;
         max-width: 100%;
         border-radius: 16px 16px 0 0;
-        max-height: 70vh;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 20px 20px 24px 20px;
-        padding-top: 28px; /* 為拖曳把手留空間 */
+        max-height: 75vh;
+        overflow: visible;
+        padding: 16px 20px 24px 20px;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
       }
 
-      /* 預設收起狀態 - 露出標題和描述 */
+      /* 預設收起狀態 - 只露出標題 */
       #info-panel:not(.expanded) {
-        transform: translateY(calc(100% - 140px));
+        transform: translateY(calc(100% - 60px));
       }
 
       /* 展開狀態 */
       #info-panel.expanded {
         transform: translateY(0);
+        overflow-y: auto;
       }
 
       /* 拖曳把手視覺提示 */
       #info-panel::before {
         content: '';
         position: absolute;
-        top: 10px;
+        top: 6px;
         left: 50%;
         transform: translateX(-50%);
-        width: 40px;
+        width: 36px;
         height: 4px;
-        background: #bbb;
+        background: #ccc;
         border-radius: 2px;
-        z-index: 101;
       }
 
       #info-panel h1 {
         font-size: 1.1rem;
         cursor: pointer;
+        margin-top: 4px;
       }
 
       /* 滑鼠操作說明 - 手機版隱藏 */
