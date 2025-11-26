@@ -162,27 +162,10 @@ function createBarStool() {
   return g;
 }
 
-// 吊燈
+// 吊燈（已移除 - 避免遮擋 3D 視線）
 function createPendantLights() {
   const g = new THREE.Group();
-  
-  const pG = new THREE.SphereGeometry(0.12, 24, 24);
-  const pM = new THREE.MeshStandardMaterial({ 
-    color: 0xfff8e7, emissive: 0xfff0d4, emissiveIntensity: 0.5, 
-    transparent: true, opacity: 0.9 
-  });
-  
-  [-0.3, 0.3].forEach((x, i) => {
-    const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, 0.7 + i * 0.12, 8), M.blackMetal);
-    cord.position.set(x, APARTMENT.height - 0.35 - i * 0.06, 0); g.add(cord);
-    
-    const pendant = new THREE.Mesh(pG, pM);
-    pendant.position.set(x, APARTMENT.height - 0.7 - i * 0.12, 0); g.add(pendant);
-    
-    const light = new THREE.PointLight(0xfff5e6, 0.5, 3);
-    light.position.copy(pendant.position); g.add(light);
-  });
-  
+  // 不創建任何吊燈物件
   return g;
 }
 
