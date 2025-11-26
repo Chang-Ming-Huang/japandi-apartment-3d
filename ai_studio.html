@@ -227,7 +227,7 @@
             <button class="active" onclick="showSection('living')">客廳 (Living)</button>
             <button onclick="showSection('kitchen')">餐廚區 (Kitchen)</button>
             <button onclick="showSection('master')">主臥室 (Master)</button>
-            <button onclick="showSection('multi')">多功能室 (Flex)</button>
+            <button onclick="showSection('multi')">工作室 (Study)</button>
             <button onclick="showSection('bath')">衛浴 (Bath)</button>
             <button onclick="showSection('overview')">全屋俯視 (Plan)</button>
         </nav>
@@ -240,26 +240,23 @@
     <section id="living" class="content-section active">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">📷</div>
-                    <div class="placeholder-text">PLACEHOLDER: LIVING ROOM</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
-                <p style="font-size: 0.8rem; color: #888; text-align: center; margin-top: 5px;">*請在此處插入客廳渲染圖</p>
+                <img
+                    src="screenshots/screenshot_living.png"
+                    alt="Living Room"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
                 <h2>客廳區 Living Room</h2>
                 <div class="specs">
                     <strong>空間規格：</strong>
                     <ul>
-                        <li>坪數：8 坪 (核心社交區)</li>
-                        <li>重點：寬敞感、採光、低矮家具</li>
-                        <li>功能：沙發休憩 + 開放式小書房/展示區</li>
+                        <li>坪數：8 坪｜5.5m × 4.8m (客廳中心 = 3D 原點)</li>
+                        <li>重點：左牆 2.4m × 2.2m 落地窗、低矮沙發保持視野</li>
+                        <li>配置：沙發位於 (0,0,1.0) 朝北，電視牆在 Z = -2.4，與餐廚完全連通</li>
                     </ul>
                 </div>
-                <p>這是整個家的主角。採用淺橡木地板與塗料牆面，利用低矮的布藝沙發來放大空間視覺高度。亞麻窗簾過濾出的柔和光線是設計的靈魂。</p>
+                <p>這是整個家的主角：淺橡木地板、米白塗料，加上旋轉 180° 的低矮沙發面向北側電視牆，保持 0.5m 以上的回字動線。左牆整面落地窗與紗簾導入柔光，右側完全打開延伸到餐廚。</p>
                 
                 <div class="prompt-box">
                     <h3>🎨 Midjourney Prompt</h3>
@@ -274,25 +271,23 @@
     <section id="kitchen" class="content-section">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">🍽️</div>
-                    <div class="placeholder-text">PLACEHOLDER: KITCHEN</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
+                <img
+                    src="screenshots/screenshot_kitchen.png"
+                    alt="Kitchen & Dining Area"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
                 <h2>餐廚區 Dining & Kitchen</h2>
                 <div class="specs">
                     <strong>空間規格：</strong>
                     <ul>
-                        <li>坪數：3.5 - 4 坪</li>
-                        <li>配置：L 型廚具 + 中島兼餐桌</li>
-                        <li>重點：動線通透、節省空間</li>
+                        <li>坪數：4 坪｜3.5m × 3.8m</li>
+                        <li>配置：2.4m 長邊 L 型廚具靠後牆 + 0.6m 短邊延伸，中央 1.4m × 0.8m 餐桌</li>
+                        <li>重點：與客廳同平面，軸線對齊走道，保留 0.9m 側向通道</li>
                     </ul>
                 </div>
-                <p>為了在有限空間內創造最大機能，採用 L 型廚具佈局。中島設計延伸出一張木製餐桌，既是備料區也是用餐區，視覺上與客廳連成一氣。</p>
+                <p>廚具沿北、東兩側展開，霧白面板搭配淺木檯面，靠北側整合水槽與上櫃。餐桌置中並與走道平行，前後各兩張餐椅，維持開放視線到客廳。</p>
                 
                 <div class="prompt-box">
                     <h3>🎨 Midjourney Prompt</h3>
@@ -307,25 +302,23 @@
     <section id="master" class="content-section">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">🛏️</div>
-                    <div class="placeholder-text">PLACEHOLDER: MASTER BEDROOM</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
+                <img
+                    src="screenshots/screenshot_master.png"
+                    alt="Master Bedroom"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
                 <h2>主臥室 Master Bedroom</h2>
                 <div class="specs">
                     <strong>空間規格：</strong>
                     <ul>
-                        <li>坪數：3.5 - 4 坪</li>
-                        <li>配置：標準雙人床 + 頂天衣櫃牆</li>
-                        <li>氛圍：沈穩、放鬆、私密</li>
+                        <li>坪數：5 坪｜4.0m × 4.0m</li>
+                        <li>配置：床頭靠後牆窗戶，左牆 2m 頂天衣櫃，門置於 X ≈ -0.75</li>
+                        <li>氛圍：低床架、亞麻寢具、隱藏把手衣櫃減少壓迫</li>
                     </ul>
                 </div>
-                <p>主臥室強調絕對的放鬆。使用與牆面同色的頂天立地衣櫃來隱藏收納量，減少壓迫感。低重心的床架與亞麻寢具延續了整體的日式侘寂氛圍。</p>
+                <p>床位於局部 (0.3, 0, 0.8) 並旋轉 180°，床頭貼窗享受自然光；衣櫃與化妝台沿左牆串聯，右側僅保留單一床頭櫃，使入口至窗戶的通道暢通。</p>
                 
                 <div class="prompt-box">
                     <h3>🎨 Midjourney Prompt</h3>
@@ -336,33 +329,31 @@
         </div>
     </section>
 
-    <!-- 多功能室 -->
+    <!-- 工作室 -->
     <section id="multi" class="content-section">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">🍵</div>
-                    <div class="placeholder-text">PLACEHOLDER: FLEX ROOM</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
+                <img
+                    src="screenshots/screenshot_study.png"
+                    alt="Study Room"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
-                <h2>次臥/多功能室 Multifunctional</h2>
+                <h2>工作室 Study Room</h2>
                 <div class="specs">
                     <strong>空間規格：</strong>
                     <ul>
-                        <li>坪數：2 - 2.5 坪</li>
-                        <li>配置：架高地板 (榻榻米概念) + 懸浮書桌</li>
-                        <li>功能：客房、閱讀室、瑜伽區</li>
+                        <li>坪數：1.5 坪｜1.8m × 2.8m</li>
+                        <li>配置：書桌沿左牆旋轉 90°，後牆磨砂窗，門心 X ≈ 2.2</li>
+                        <li>功能：小型居家辦公 / 專注工作台，入口處配置層架</li>
                     </ul>
                 </div>
-                <p>這是一個彈性空間。不做滿的家具配置，利用架高地板下方做收納。平時是明亮的書房，客人來訪時鋪上床墊即可變身為客房。</p>
+                <p>工作室以書桌為核心：桌面靠左牆並面向右側顯示器，椅子位於室內中線，保留入門 0.9m 的通行寬度。後牆的磨砂窗提供柔光，門口附近的層架收納文件與植栽。</p>
                 
                 <div class="prompt-box">
                     <h3>🎨 Midjourney Prompt</h3>
-                    <div class="prompt-code" id="prompt-multi">Interior design photography, small multifunctional room, 2.5 ping space. Raised wooden floor platform (Tatami style) with storage underneath. A floating desk near the window. Can serve as a guest room or reading nook. Minimalist aesthetics, sliding translucent door (shoji screen vibe but modern). Light oak wood texture everywhere, warm and inviting. Japandi style, architectural digest, 8k, --ar 16:9</div>
+                    <div class="prompt-code" id="prompt-multi">Interior design photography, compact home office, 1.5 ping space (1.8m x 2.8m). Built-in wooden desk running along the left wall, rotated 90 degrees to face the center. Frosted glass window on the back wall, slim shelving unit near the entrance. Japandi style, light oak surfaces, beige plaster walls, soft diffused daylight, tidy workstation, high detail, 8k, --ar 16:9</div>
                     <button class="copy-btn" onclick="copyToClipboard('prompt-multi')">Copy</button>
                 </div>
             </div>
@@ -373,25 +364,23 @@
     <section id="bath" class="content-section">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">🚿</div>
-                    <div class="placeholder-text">PLACEHOLDER: BATHROOM</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(3:4 or 16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
+                <img
+                    src="screenshots/screenshot_bath.png"
+                    alt="Bathroom"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
                 <h2>衛浴 Bathroom</h2>
                 <div class="specs">
                     <strong>空間規格：</strong>
                     <ul>
-                        <li>坪數：1.5 坪</li>
-                        <li>配置：乾濕分離淋浴間 + 懸浮洗手台</li>
-                        <li>風格：SPA 級質感、明亮</li>
+                        <li>坪數：1.5 坪｜2.0m × 2.8m</li>
+                        <li>配置：入口左側懸浮洗手台與 LED 鏡，中段馬桶，內側 0.9m×0.9m 玻璃淋浴間</li>
+                        <li>風格：乾濕分離、淺米石材、黑色金屬點綴</li>
                     </ul>
                 </div>
-                <p>雖然空間不大，但透過玻璃隔斷和懸浮式櫃體，讓地板面積在視覺上延伸，創造出寬敞感。淺米色石材磚帶來高級且乾淨的感受。</p>
+                <p>入口處即可使用轉 90° 的懸浮洗手台；馬桶沿左牆排在中段，最後方是黑框玻璃淋浴間與滑門，並加上第二道磨砂隔屏阻擋水氣，讓 1.5 坪空間維持乾爽。</p>
                 
                 <div class="prompt-box">
                     <h3>🎨 Midjourney Prompt</h3>
@@ -406,21 +395,19 @@
     <section id="overview" class="content-section">
         <div class="spatial-info">
             <div class="image-wrapper">
-                <!-- Image Placeholder Frame -->
-                <div class="image-placeholder-frame">
-                    <div class="placeholder-icon">📐</div>
-                    <div class="placeholder-text">PLACEHOLDER: 3D FLOOR PLAN</div>
-                    <div class="placeholder-sub">Waiting for AI Generation<br>(16:9 Aspect Ratio)</div>
-                </div>
-                <!-- End Frame -->
+                <img
+                    src="screenshots/screenshot_overview.png"
+                    alt="3D Floor Plan Overview"
+                    style="width: 100%; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover;"
+                />
             </div>
             <div class="text-content">
                 <h2>全屋俯視 3D Plan</h2>
                 <div class="specs">
                     <strong>總坪數：20 坪</strong>
                     <ul>
-                        <li>格局：2房 1廳 1衛 + 開放式餐廚</li>
-                        <li>核心：公領域最大化 (8坪客廳 + 4坪餐廚)</li>
+                        <li>格局：2 房 1 廳 1 衛 + 開放式餐廚，走道線固定 Z = 2.0</li>
+                        <li>核心：公領域最大化 (8 坪客廳 + 4 坪餐廚)，私領域門心分別在 X = -0.75 / 2.2 / 4.3</li>
                     </ul>
                 </div>
                 <p>這張圖是用於檢視動線與整體空間分配的俯視圖。可以清楚看到公私領域的劃分，以及核心客廳如何連結其他空間。</p>
